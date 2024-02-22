@@ -1,7 +1,7 @@
 //your JS code here. If required.
 const btn = document.querySelector('#btn');
 const showContent = document.querySelector('#output');
-
+showContent.textContent = "";
 btn.addEventListener('click',()=>{
 	const text = document.querySelector('#text').value;
 const num = document.querySelector('#delay').value;
