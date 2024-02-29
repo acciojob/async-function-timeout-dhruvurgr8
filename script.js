@@ -1,14 +1,20 @@
 const btn = document.querySelector('#btn');
 const showContent = document.querySelector('#output');
+const form = document.querySelector('.form');
+let data = {};
 
-btn.addEventListener('click', async () => {
-    const text = document.querySelector('#text').value;
-    const num = document.querySelector('#delay').value;
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-    function createPromise(text, num) {
+    const text = form.text.value;
+    const num = form.num.value;
+    data.text = text;
+    data.num = num;
+
+    function createPromise() {
         return new Promise((res, rej) => {
-            if (text && num) {
-                res(`${text}-${num}`);
+            if (data) {
+                res(data);
             } else {
                 rej("error occurred");
             }
@@ -17,8 +23,11 @@ btn.addEventListener('click', async () => {
 
     async function getPromise() {
         try {
-            const res = await createPromise(text, num);
-            showContent.textContent = res;
+            const res = await createPromise();
+			setTimeout(()=>{
+				showContent.textContent = `${res.text} - ${res.num}`;
+			},data.num)
+            
         } catch (error) {
             console.error(error);
             showContent.textContent = "Error occurred";
@@ -28,4 +37,6 @@ btn.addEventListener('click', async () => {
     showContent.textContent = '';
 
     await getPromise();
+    form.reset();
 });
+
