@@ -25,7 +25,7 @@ form.addEventListener('submit', async (e) => {
         try {
             const res = await createPromise();
 			setTimeout(()=>{
-				showContent.textContent = `${res.text} - ${res.num}`;
+				showContent.textContent = `${res.text} - ${res.num/1000}`;
 			},data.num)
             
         } catch (error) {
